@@ -64,6 +64,18 @@ describe('POST /api/users', () => {
 
     expect(userInDatabase).toHaveProperty('firstname');
     expect(userInDatabase.firstname).toStrictEqual(newUser.firstname);
+
+    expect(userInDatabase).toHaveProperty('lastname');
+    expect(userInDatabase.lastname).toStrictEqual(updateUser.lastname);
+
+    expect(userInDatabase).toHaveProperty('email');
+    expect(userInDatabase.email).toStrictEqual(updateUser.email);
+
+    expect(userInDatabase).toHaveProperty('city');
+    expect(userInDatabase.city).toStrictEqual(updateUser.city);
+
+    expect(userInDatabase).toHaveProperty('language');
+    expect(userInDatabase.language).toStrictEqual(updateUser.language);
   });
 
   it('should return an error', async () => {

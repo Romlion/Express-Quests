@@ -59,6 +59,18 @@ describe('POST /api/movies', () => {
 
     expect(movieInDatabase).toHaveProperty('title');
     expect(movieInDatabase.title).toStrictEqual(newMovie.title);
+
+    expect(movieInDatabase).toHaveProperty('director');
+    expect(movieInDatabase.director).toStrictEqual(updateMovie.director);
+
+    expect(movieInDatabase).toHaveProperty('year');
+    expect(movieInDatabase.year).toStrictEqual(updateMovie.year);
+
+    expect(movieInDatabase).toHaveProperty('color');
+    expect(movieInDatabase.color).toStrictEqual(updateMovie.color);
+
+    expect(movieInDatabase).toHaveProperty('duration');
+    expect(movieInDatabase.duration).toStrictEqual(updateMovie.duration);
   });
 
   it('should return an error', async () => {
@@ -68,7 +80,7 @@ describe('POST /api/movies', () => {
       .post('/api/movies')
       .send(movieWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 });
 
@@ -132,7 +144,7 @@ describe('PUT /api/movies/:id', () => {
       .put('/api/movies/1')
       .send(movieWithMissingProps);
 
-    expect(response.status).toEqual(500);
+    expect(response.status).toEqual(422);
   });
 
   it('should return no movie', async () => {
@@ -144,7 +156,9 @@ describe('PUT /api/movies/:id', () => {
       duration: 162,
     };
 
-    const response = await request(app).put('/api/movies/0').send(newMovie);
+    const response = await request(app)
+      .put('/api/movies/0')
+      .send(newMovie);
 
     expect(response.status).toEqual(404);
   });

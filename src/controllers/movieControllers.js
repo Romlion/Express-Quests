@@ -74,7 +74,8 @@ const updateMovie = (req, res) => {
     title, director, year, color, duration,
   } = req.body;
 
-  database.query('UPDATE movies set title = ?, director = ?, year = ?, color = ?, duration = ? where id = ?', [title, director, year, color, duration, id])
+  database
+    .query('UPDATE movies set title = ?, director = ?, year = ?, color = ?, duration = ? where id = ?', [title, director, year, color, duration, id])
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
