@@ -71,7 +71,7 @@ const updateUser = (req, res) => {
     firstname, lastname, email, city, language,
   } = req.body;
 
-  database.query('update users set firstname = ?, lastname = ?, email = ?, city = ?, language = ? where id = ?', [firstname, lastname, email, city, language])
+  database.query('UPDATE user SET firstname = ?, lastname = ?, email = ?, city = ?, language = ? WHERE id = ?', [firstname, lastname, email, city, language])
     .then(([result]) => {
       if (result.affectedRows === 0) {
         res.sendStatus(404);
@@ -80,7 +80,7 @@ const updateUser = (req, res) => {
       }
     })
     .catch((err) => {
-      console.error(err);
+      console.error('Erreur lors de la mise à jour de l utilisateur :', err);
       res.sendStatus(500);
     });
 };
